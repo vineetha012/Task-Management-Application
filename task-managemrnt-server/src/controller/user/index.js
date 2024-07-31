@@ -1,7 +1,7 @@
 const errorHandler = require("../../utils/errorHandler")
 const userService = require('../../service/user/index')
 const { hashPassword, comparePassword } = require("../../utils/bcrypt")
-const { generateToken } = require("../../utils/jwthandler")
+const { generateToken } = require("../../utils/jwtHandler")
 const createUser = async (req) => {
     try {
         const userData = {
