@@ -1,0 +1,24 @@
+.navbar {
+    background-color: #343a40;
+}
+
+.brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.navLink {
+    color: #ffffff;
+    margin-left: 1rem;
+    transition: color 0.2s ease-in-out;
+}
+
+.navLink:hover {
+    color: #f8f9fa;
+}
+
+.navLink.active {
+    color: #00bcd4;
+    border-bottom: 2px solid #00bcd4;
+}
