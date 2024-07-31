@@ -3,7 +3,8 @@
     height: 100vh;
     align-items: center;
     justify-content: center;
-    background-color: #d8e5e8;
+    background-color:#d8e5e8
+    /* // #d8e5e8; */
 }
 
 .login-container {
@@ -29,7 +30,8 @@
 
 .header {
     text-align: center;
-    margin-bottom: 20px;
+    color: #343a40;
+        margin-bottom: 20px;
 }
 
 .form-group {
@@ -38,7 +40,8 @@
     height: 80px;
 }
 .btn-primary {
-    width: 100%;
+    background-color: #343a40;
+     width: 100%;
 }
 
 .error-message {

@@ -71,7 +71,7 @@ const Column: React.FC<{ column: Column; moveTask: any }> = ({ column, moveTask 
 
 
 const TaskList: React.FC = () => {
-    const { data: tasksList, isLoading: tasksListApiIsLoading, isError: tasksListApiIsError } = useGetTasksListQuery()
+    const { data: tasksList, isFetching: tasksListApiIsLoading, isError: tasksListApiIsError } = useGetTasksListQuery()
     const [editTaskApi, { isLoading: editTaskApiIsLoading }] = useEditTaskMutation()
     const navigate = useCustomNavigate()
     const formatReponse = (tasksList: any) => {
@@ -101,10 +101,11 @@ const TaskList: React.FC = () => {
     return (
         <DndProvider backend={HTML5Backend}>
             <div className={styles.board}>
-                {tasksListApiIsLoading || editTaskApiIsLoading ? <Loader />
+                {tasksListApiIsLoading  ?<Loader />
                     : !tasksListApiIsError? tasksList?.data?.map((column: any) => (
                         <Column key={column.id} column={column} moveTask={moveTask} />
                     )) : <div className={styles.apiError}>Api Error</div>}
+                {/* {editTaskApiIsLoading && <Loader />} */}
             </div>
         </DndProvider>
     );

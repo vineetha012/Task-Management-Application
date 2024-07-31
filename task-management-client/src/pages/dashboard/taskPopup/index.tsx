@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { checkErrorstask, taskFieldErrorValidation, taskInfoInitialState, taskIntrface } from './taskController';
+import { checkErrorstask, emptytaskErrorMessages, taskFieldErrorValidation, taskInfoInitialState, taskIntrface } from './taskController';
 import { useAppDispatch, useAppSelector, useCustomNavigate } from '../../../reduxStore/hooks/hooks';
 import { doValidateTaskTitle } from '../../../utils/errorsHandler'
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { PATH } from '../../../constants/path';
 import { useCreateTaskMutation } from '../../../services/task';
 import { toast } from 'react-toastify';
+import './task.css'
 interface TaskFormProps {
     currentCol: string;
     setCurrentCol: any,
@@ -38,6 +39,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ setCurrentCol, currentCol, handleCl
                 .then((payload: any) => {
                     handleCloseTaskForm();
                     navigate(PATH.TASKLIST)
+                    emptytaskErrorMessages(dispatch)
                     setTaskInfo(taskInfoInitialState)
                     toast.success(payload?.message || 'Created task successfully')
                 }).catch((error: any) => toast.error(error?.data?.error?.message || 'Failed to create task'))
@@ -73,43 +75,48 @@ const TaskForm: React.FC<TaskFormProps> = ({ setCurrentCol, currentCol, handleCl
     };
 
     console.log(taskInfo)
-    // useEffect(() => {
-    //     if (type === 'edit-task') {
-    //         handleShowTaskForm();
-    //     } else if (type === 'add-task') {
-    //         if (currentCol === '') {
-    //             handleCloseTaskForm();
-    //         } else {
-    //             handleShowTaskForm();
-    //         }
-    //     }
-    //     return () => {
-    //         setTaskInfo(taskInfoInitialState);
-    //     };
-    // }, []);
+    useEffect(() => {
+        // if (type === 'edit-task') {
+        //     handleShowTaskForm();
+        // } else if (type === 'add-task') {
+        //     if (currentCol === '') {
+        //         handleCloseTaskForm();
+        //     } else {
+        //         handleShowTaskForm();
+        //     }
+        // }
+        return () => {
+            setTaskInfo(taskInfoInitialState);
+            emptytaskErrorMessages(dispatch)
+        };
+    }, []);
 
     return (
-        <Modal show={showTaskForm} onHide={handleCloseTaskForm}>
+        <Modal show={showTaskForm} onHide={()=>{
+            handleCloseTaskForm()
+            emptytaskErrorMessages(dispatch)
+            setTaskInfo(taskInfoInitialState);
+
+            }}>
             <Modal.Header closeButton>
                 <Modal.Title>Add New Task</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>
-                    <Form.Group controlId="formTaskTitle">
+                    <Form.Group className='form-group' controlId="formTaskTitle">
                         <Form.Label>Title*</Form.Label>
                         <Form.Control
                             type="text"
                             placeholder="Enter task title"
                             value={taskInfo.title}
                             name='title'
-                            required
                             onBlur={(event) => doValidateTaskTitle(event.target.value, dispatch)}
                             onChange={getTaskInfo}
                         />
-                        {taskTitleErrMessage && <div>{taskTitleErrMessage}</div>}
+                        {taskTitleErrMessage && <div className='error-message'>{taskTitleErrMessage}</div>}
                         
                     </Form.Group>
-                    <Form.Group controlId="formTaskStatus">
+                    <Form.Group className='form-group' controlId="formTaskStatus">
                         <Form.Label>Status*</Form.Label>
                         <Form.Control
                             as="select"
@@ -123,7 +130,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ setCurrentCol, currentCol, handleCl
                             <option value="completed">Completed</option>
                         </Form.Control>
                     </Form.Group>
-                    <Form.Group controlId="formTaskPriority">
+                    <Form.Group className='form-group' controlId="formTaskPriority">
                         <Form.Label>Priority</Form.Label>
                         <Form.Control
                             as="select"
@@ -136,7 +143,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ setCurrentCol, currentCol, handleCl
                             <option value="high">High</option>
                         </Form.Control>
                     </Form.Group>
-                    <Form.Group controlId="formTaskDeadline">
+                    <Form.Group className='form-group'  controlId="formTaskDeadline">
                         <Form.Label>Deadline</Form.Label>
                         <DatePicker
                             className="form-control"
@@ -147,7 +154,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ setCurrentCol, currentCol, handleCl
 
                         />
                     </Form.Group>
-                    <Form.Group controlId="formTaskDescription">
+                    <Form.Group className='form-group' controlId="formTaskDescription">
                         <Form.Label>Description</Form.Label>
                         <Form.Control
                             as="textarea"
@@ -158,9 +165,12 @@ const TaskForm: React.FC<TaskFormProps> = ({ setCurrentCol, currentCol, handleCl
                             onChange={getTaskInfo}
                         />
                     </Form.Group>
-                    <Button variant="primary" type="submit">
-                        {createTaskApiIsLoading?'Loading...':'Add Task'}
-                    </Button>
+                    <div className='addtask-btn-container'>
+                        <Button className='addtask-btn' variant="primary" type="submit">
+                            {createTaskApiIsLoading ? 'Loading...' : 'Add Task'}
+                        </Button>
+                    </div>
+                    
                 </Form>
             </Modal.Body>
         </Modal>

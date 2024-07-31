@@ -40,7 +40,6 @@ export const checkErrorstask = (dispatch: any, data: taskIntrface) => {
 };
 
 export const emptytaskErrorMessages = (dispatch: any) => {
-    dispatch(setNameErrorMessage(""))
-    dispatch(setEmailErrorMessage(""))
-    dispatch(setPasswordErrorMessage(""))
+    dispatch(setTaskTitleErrorMessage(""))
+   
 }

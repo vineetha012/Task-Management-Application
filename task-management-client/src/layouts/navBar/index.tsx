@@ -21,9 +21,9 @@ const AppNavbar: React.FC = () => {
             <Nav.Link as={Link} to={PATH.TASKLIST} className={styles.navLink}>Dashboard</Nav.Link>
             <Nav.Link as={Link} to="/profile" className={styles.navLink}>Profile</Nav.Link>
             <Nav.Link onClick={logoutHandler} className={styles.navLink}>Logout</Nav.Link>
-            <Nav.Link disabled className={styles.navLink}>
+            {/* <Nav.Link disabled className={styles.navLink}>
               user:vineetha
-            </Nav.Link>
+            </Nav.Link> */}
           </Nav>
         </Navbar.Collapse>
       </Container>
