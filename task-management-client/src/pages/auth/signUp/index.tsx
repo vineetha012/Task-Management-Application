@@ -5,7 +5,7 @@ import styles from '../login/login.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector, useCustomNavigate } from '../../../reduxStore/hooks/hooks';
 import { setEmailErrorMessage, setPasswordErrorMessage } from '../../../reduxStore/reducer/errorMessageReducer';
-import { checkErrorssignUp, signUpFieldErrorValidation, signupInfoInitialState, signupInfoTypes } from './signupController';
+import { checkErrorssignUp, emptySignUpErrorMessages, signUpFieldErrorValidation, signupInfoInitialState, signupInfoTypes } from './signupController';
 import { doValidateEmail, doValidateName, doValidatePassword } from '../../../utils/errorsHandler';
 import { useLoginMutation } from '../../../services/login';
 import { toast } from 'react-toastify';
@@ -43,11 +43,13 @@ const Login: React.FC = () => {
     useEffect(() => {
         return () => {
             setsignupInfo(signupInfoInitialState)
+            emptySignUpErrorMessages(dispatch)
         }
     }, [])
     return (
         <>
             <div className={styles.container}>
+                <h2 className={styles['task-manager-header']}>Task Manager</h2>
 
                 <div className={styles['login-container']}>
                     <div className={styles['image-container']}></div>

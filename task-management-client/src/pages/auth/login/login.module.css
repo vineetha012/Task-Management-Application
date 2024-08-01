@@ -1,10 +1,12 @@
 .container {
     display: flex;
     height: 100vh;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color:#d8e5e8
     /* // #d8e5e8; */
+    
 }
 
 .login-container {
@@ -43,7 +45,10 @@
     background-color: #343a40;
      width: 100%;
 }
-
+.task-manager-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
 .error-message {
     color: red;
     font-size: 0.875rem;

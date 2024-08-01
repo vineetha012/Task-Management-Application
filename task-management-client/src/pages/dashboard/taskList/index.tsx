@@ -62,7 +62,7 @@ const Column: React.FC<{ column: Column; moveTask: any }> = ({ column, moveTask 
                 }} />
             </div>
             {column.tasks.map((task: any, index: any) => (
-                <Task key={task.id} task={task} index={index} columnId={column.id} moveTask={moveTask} />
+                <Task key={task.id} task={task} index={index} coltitle={column.title} columnId={column.id} moveTask={moveTask} />
             ))}
             <TaskForm setCurrentCol={setCurrentCol} handleShowTaskForm={handleShowTaskForm} currentCol={currentCol} handleCloseTaskForm={handleCloseTaskForm} showTaskForm={showTaskForm} />
         </div>

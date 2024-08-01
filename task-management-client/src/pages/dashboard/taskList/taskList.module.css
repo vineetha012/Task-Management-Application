@@ -134,10 +134,22 @@
 .taskDeadline {
     color: #db7134;
 }
-.taskPriority,
+.complete-status {
+    font-size: medium;
+    color: #0ffe17;
+}
+.inprogress-status {
+    color: #e6ab46;
+}
+.under-review-status {
+    color: #14b8ad;
+}
+.to-do-status {
+    color: #b84314;
+}
 .taskDeadline {
-    margin: 5px 0;
-    font-size: 0.9rem;
+    color: #ededed;
+    /* Example color for deadline */
 }
 .dragging {
     opacity: 0.5;

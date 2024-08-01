@@ -57,6 +57,7 @@ const Login: React.FC = () => {
     return (
         <>
             <div className={styles.container}>
+                <h2 className={styles['task-manager-header']}>Task Manager</h2>
 
                 <div className={styles['login-container']}>
                     <div className={styles['image-container']}></div>

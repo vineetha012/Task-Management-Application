@@ -24,9 +24,11 @@ interface TaskProps {
     index: number;
     columnId: string;
     moveTask: any;
+    coltitle:any;
 }
 
-const Task: React.FC<TaskProps> = ({ task, index, columnId, moveTask }) => {
+const Task: React.FC<TaskProps> = ({ task, coltitle, index, columnId, moveTask }) => {
+    console.log(columnId)
     const navigate=useCustomNavigate()
     const [deleteTaskApi, { isLoading: deleteTaskApiIsLoading }] = useDeleteTaskMutation()
     const [{ isDragging }, ref] = useDrag({
@@ -58,10 +60,10 @@ const Task: React.FC<TaskProps> = ({ task, index, columnId, moveTask }) => {
             </div>
             {/* {task.description && <p className={styles.taskDescription}>{task.description}</p>} */}
             <div className={styles.taskDetails}>
-                {task.priority && <span className={styles.taskPriority}>Status: {task.status}</span>}
-                {task.priority && <span className={styles.taskPriority}>Priority: {task.priority}</span>}
+                {task.status && <span className={styles[task.status == 'completed' ? 'complete-status' : task.status == 'inprogress' ? 'inprogress-status' : task.status == 'to-do' ? 'to-do-status':'under-review-status']}><span>Status:</span> {coltitle}</span>}
+                {task.priority && <span className={styles.taskPriority}><span>Priority:</span> {task.priority}</span>}
             </div>
-            {task.deadline && <span className={styles.taskDeadline}>Deadline: {new Date(task.deadline).toLocaleDateString()}</span>}
+            {task.deadline && <span className={styles.taskDeadline}><span>Deadline:</span> {new Date(task.deadline).toLocaleDateString()}</span>}
 
         </div>
     );
