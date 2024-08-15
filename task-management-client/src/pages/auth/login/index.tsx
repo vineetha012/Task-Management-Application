@@ -2,30 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Form, Button, Alert } from 'react-bootstrap';
 import styles from './login.module.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector, useCustomNavigate } from '../../../reduxStore/hooks/hooks';
-import { setEmailErrorMessage, setPasswordErrorMessage } from '../../../reduxStore/reducer/errorMessageReducer';
 import { checkErrorsLogin, emptyLoginErrorMessages, loginFieldErrorValidation, loginInfoInitialState, loginInfoTypes } from './loginController';
 import { doValidateEmail, doValidatePassword } from '../../../utils/errorsHandler';
 import { useLoginMutation } from '../../../services/login';
 import { toast } from 'react-toastify';
 import { PATH } from '../../../constants/path';
-// import { loginUser } from '../../redux/slices/authSlice';
+import ButtonLoader from '../../../components/loaders/buttonLoader';
 
 const Login: React.FC = () => {
     const [loginInfo, setLoginInfo] = useState<loginInfoTypes>(loginInfoInitialState);
     const dispatch: any = useAppDispatch();
     const navigate = useCustomNavigate()
     const { emailErrorMessage, passwordErrMessage } = useAppSelector((state) => state.errorMessageReducer);
-    const [LoginApi, {
-        data: loginApiResponse,
-        isError: loginApiError,
-        isLoading: loginApiIsLoading,
-        isFetching: loginApiIsFetching,
-        isSuccess: loginApiIsSuccess,
-        error: loginError,
-    },
-    ]: any = useLoginMutation();
+    const [LoginApi, { isLoading: loginApiIsLoading }]: any = useLoginMutation();
+
     const loginHandler = async (event: any) => {
         event.preventDefault();
         if (checkErrorsLogin(dispatch, loginInfo)) {
@@ -34,7 +26,7 @@ const Login: React.FC = () => {
                     setLoginInfo(loginInfoInitialState)
                     emptyLoginErrorMessages(dispatch)
                     localStorage.setItem('app-token', payload?.data?.token)
-                    toast.success(payload?.message||'Login successful')
+                    toast.success(payload?.message || 'Login successful')
                     navigate(PATH.TASKLIST)
                 }).catch((error: any) => toast.error(error?.data?.error?.message || 'Login successful'))
         }
@@ -48,12 +40,14 @@ const Login: React.FC = () => {
         }));
         loginFieldErrorValidation(event, dispatch)
     }
+
     useEffect(() => {
         return () => {
             setLoginInfo(loginInfoInitialState)
             emptyLoginErrorMessages(dispatch)
         }
     }, [])
+
     return (
         <>
             <div className={styles.container}>
@@ -90,11 +84,11 @@ const Login: React.FC = () => {
                                 />
                                 {passwordErrMessage && <div className={styles['error-message']}>{passwordErrMessage}</div>}
                             </Form.Group>
-
-                            <Button variant="primary" disabled={loginApiIsLoading} type="submit" onClick={loginHandler} className={styles['btn-primary']}>
-                                {loginApiIsLoading ? 'Loading..' : 'Login'}
-
-                            </Button>
+                            <div className={styles['btn-container']}>
+                                <Button variant="primary" disabled={loginApiIsLoading} type="submit" onClick={loginHandler} className={styles['btn-primary']}>
+                                    {loginApiIsLoading ? <ButtonLoader /> : 'Login'}
+                                </Button>
+                            </div>
                             <div className="mt-3 text-center">
                                 Don't have an account? <Link to="/signup">Sign up</Link>
                             </div>

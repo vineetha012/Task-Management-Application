@@ -11,6 +11,7 @@ import { useLoginMutation } from '../../../services/login';
 import { toast } from 'react-toastify';
 import { PATH } from '../../../constants/path';
 import { useSignUpMutation } from '../../../services/signUp';
+import ButtonLoader from '../../../components/loaders/buttonLoader';
 // import { loginUser } from '../../redux/slices/authSlice';
 
 const Login: React.FC = () => {
@@ -25,7 +26,7 @@ const Login: React.FC = () => {
             await signupApi(signupInfo).unwrap()
                 .then((payload: any) => {
                     navigate(PATH.LOGIN)
-                    toast.success(payload?.message||'register successful')
+                    toast.success(payload?.message || 'register successful')
                 })
 
                 .catch((error: any) => toast.error(error?.data?.error?.message || 'Login successful'))
@@ -95,10 +96,12 @@ const Login: React.FC = () => {
                                 />
                                 {passwordErrMessage && <div className={styles['error-message']}>{passwordErrMessage}</div>}
                             </Form.Group>
+                            <div className={styles['btn-container']}>
+                                <Button variant="primary" disabled={signUpApiIsLoading} type="submit" onClick={loginHandler} className={styles['btn-primary']}>
+                                    {signUpApiIsLoading ? <ButtonLoader /> : 'SignUp'}
+                                </Button>
+                            </div>
 
-                            <Button variant="primary" disabled={signUpApiIsLoading} type="submit" onClick={loginHandler} className={styles['btn-primary']}>
-                                {signUpApiIsLoading?'Loading..':'SignUp'}
-                            </Button>
                             <div className="mt-3 text-center">
                                 Don't have an account? <Link to="/">Login</Link>
                             </div>

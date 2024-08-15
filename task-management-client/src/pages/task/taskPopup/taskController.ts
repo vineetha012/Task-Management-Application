@@ -1,5 +1,5 @@
-import { setEmailErrorMessage, setNameErrorMessage, setPasswordErrorMessage, setTaskTitleErrorMessage } from "../../../reduxStore/reducer/errorMessageReducer";
-import { doValidateEmail, doValidateName, doValidatePassword, doValidateTaskTitle } from "../../../utils/errorsHandler";
+import { setTaskTitleErrorMessage } from "../../../reduxStore/reducer/errorMessageReducer";
+import { doValidateTaskTitle } from "../../../utils/errorsHandler";
 export interface taskIntrface {
     title: string;
     description: string;
@@ -41,5 +41,4 @@ export const checkErrorstask = (dispatch: any, data: taskIntrface) => {
 
 export const emptytaskErrorMessages = (dispatch: any) => {
     dispatch(setTaskTitleErrorMessage(""))
-   
 }

@@ -97,7 +97,10 @@ const getTaskList =async (user) =>{
 }
 
 
-
+async function getNextTaskNumber(userId) {
+    const latestTask = await Task.findOne({ user: userId }).sort({ taskNumber: -1 });
+    return latestTask ? latestTask.taskNumber + 1 : 1;
+}
 
 
 module.exports={

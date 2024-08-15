@@ -7,10 +7,12 @@ import { useCustomNavigate } from '../../reduxStore/hooks/hooks';
 
 const AppNavbar: React.FC = () => {
   const navigate=useCustomNavigate()
+
   const logoutHandler=()=>{
     localStorage.removeItem('app-token')
     navigate(PATH.LOGIN)
   }
+  
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className={styles.navbar}>
       <Container>
@@ -21,9 +23,6 @@ const AppNavbar: React.FC = () => {
             <Nav.Link as={Link} to={PATH.TASKLIST} className={styles.navLink}>Dashboard</Nav.Link>
             <Nav.Link as={Link} to="/profile" className={styles.navLink}>Profile</Nav.Link>
             <Nav.Link onClick={logoutHandler} className={styles.navLink}>Logout</Nav.Link>
-            {/* <Nav.Link disabled className={styles.navLink}>
-              user:vineetha
-            </Nav.Link> */}
           </Nav>
         </Navbar.Collapse>
       </Container>

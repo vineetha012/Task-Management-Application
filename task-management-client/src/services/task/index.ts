@@ -30,7 +30,7 @@ export const taskApi = createApi({
             }),
             invalidatesTags: ["task"],
         }),
-        editTask: builder.mutation<any, { task: any,id:any }>({
+        editTask: builder.mutation<any,any>({
             query: ({task,id}) => ({
                 url: `/task/${id}`,
                 method: "PUT",

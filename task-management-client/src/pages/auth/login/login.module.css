@@ -41,14 +41,21 @@
     margin-bottom: 1rem;
     height: 80px;
 }
+.btn-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 .btn-primary {
     background-color: #343a40;
-     width: 100%;
+     width: 80%;
+     /* align-self: center;
+     text-align: center; */
 }
 .task-manager-header {
     margin-bottom: 20px;
-    text-align: center;
-}
+    text-align: center; 
+} 
 .error-message {
     color: red;
     font-size: 0.875rem;

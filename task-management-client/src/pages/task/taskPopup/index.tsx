@@ -10,6 +10,8 @@ import { PATH } from '../../../constants/path';
 import { useCreateTaskMutation } from '../../../services/task';
 import { toast } from 'react-toastify';
 import './task.css'
+import { InputGroup } from 'react-bootstrap';
+
 interface TaskFormProps {
     currentCol: string;
     setCurrentCol: any,
@@ -17,7 +19,6 @@ interface TaskFormProps {
     showTaskForm: boolean,
     handleShowTaskForm: () => void
 }
-
 
 const TaskForm: React.FC<TaskFormProps> = ({ setCurrentCol, currentCol, handleCloseTaskForm, showTaskForm, handleShowTaskForm }) => {
     const [createTaskApi, { isLoading: createTaskApiIsLoading }] = useCreateTaskMutation()
@@ -31,10 +32,9 @@ const TaskForm: React.FC<TaskFormProps> = ({ setCurrentCol, currentCol, handleCl
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (checkErrorstask(dispatch, taskInfo)) {
-            const task: any = {
+            const task :any= {
                 ...taskInfo,status:currentCol, deadline: formatDate(taskInfo.deadline)
             }
-            console.log(task)
             await createTaskApi(task).unwrap()
                 .then((payload: any) => {
                     handleCloseTaskForm();
@@ -59,10 +59,8 @@ const TaskForm: React.FC<TaskFormProps> = ({ setCurrentCol, currentCol, handleCl
 
 
     
-    console.log(currentCol)
-    const getTaskInfo = (event: any) => {
-        const { name, value } = event.target;
-        console.log(name)
+    const getTaskInfo = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value }:any = event.target;
         if (name == 'status') {
             setCurrentCol(value)
         } else {
@@ -74,7 +72,6 @@ const TaskForm: React.FC<TaskFormProps> = ({ setCurrentCol, currentCol, handleCl
         taskFieldErrorValidation(event, dispatch);
     };
 
-    console.log(taskInfo)
     useEffect(() => {
         // if (type === 'edit-task') {
         //     handleShowTaskForm();

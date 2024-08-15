@@ -1,42 +1,51 @@
 .board {
     display: flex;
-    justify-content: space-between;
     padding: 20px;
-    background-color: #1c1c1c;
-    /* Dark background for the task board */
-    height: 100vh;
-    /* Full viewport height */
+    background-color: #172737;
+    height: 90%;
     overflow-x: auto;
+    position: relative;
 }
 
 .column {
     background-color: #2c3e50;
     color: #ecf0f1;
     border-radius: 8px;
-    padding: 16px;
     width: 24%;
     margin: 0 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     height: 100%;
-    max-height: 80vh;
+    height: 80vh;
     overflow-y: auto;
+}
+.columnTitleContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(32, 52, 69);
+    border-bottom: 0.01px solid rgb(32, 52, 69);
+    position: sticky;
+    top: 0;
+    padding: 16px;
+    height: 10%;
 }
 
 .columnTitle {
     font-size: 1.5em;
-    margin-bottom: 10px;
     color: #3498db;
     text-align: center;
-    /* Blue color for column titles */
+    align-self: center;
 }
-
+.card-container{
+    padding: 16px;
+    height: 90%;
+}
 .taskCard {
     background-color: #34495e;
-    /* Slightly lighter blue for task cards */
     color: #ecf0f1;
-    /* Light text color */
     border-radius: 8px;
     padding: 16px;
     margin-bottom: 10px;
@@ -52,28 +61,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 0.01px solid rgb(74, 98, 117);
     margin-bottom: 10px;
 }
-
-.columnTitleContainer {
-    display: flex;
-    justify-content: space-between;
-    /* Space between title and icon */
-    align-items: center;
-    /* Vertically center items */
-    margin-bottom: 10px;
+.taskTitle{
+    text-transform: capitalize;
 }
-
-.columnTitle {
-    font-size: 1.5em;
-    color: #3498db;
-    /* Blue color for column titles */
-}
-
 .addTaskIcon {
     font-size: 1.5em;
     color: #2ecc71;
-    /* Green color for add task icon */
     cursor: pointer;
     transition: color 0.2s ease;
 }
@@ -85,7 +81,6 @@
 .iconContainer {
     display: flex;
     gap: 10px;
-    /* Space between icons */
 }
 
 .editIcon,
@@ -97,7 +92,6 @@
 
 .editIcon {
     color: #3498db;
-    /* Blue color for edit icon */
 }
 
 .editIcon:hover {
@@ -106,7 +100,6 @@
 
 .deleteIcon {
     color: #e74c3c;
-    /* Red color for delete icon */
 }
 
 .deleteIcon:hover {
@@ -120,15 +113,12 @@
 
 .taskDetails {
     display: flex;
-    /* flex-direction: column; */
     justify-content: space-between;
-
     font-size: 0.9em;
 }
 
 .taskPriority {
     color: #3cbce7;
-    /* Red color for priority */
 }
 
 .taskDeadline {
@@ -149,7 +139,6 @@
 }
 .taskDeadline {
     color: #ededed;
-    /* Example color for deadline */
 }
 .dragging {
     opacity: 0.5;

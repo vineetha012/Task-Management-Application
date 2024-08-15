@@ -3,12 +3,13 @@
     position: sticky;
     top: 0;
     z-index: 1000;
+    height: 10%;
 }
 
 .brand {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #ffffff;
+    color: #3498db;
 }
 
 .navLink {

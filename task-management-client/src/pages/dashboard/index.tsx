@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react';
-import TaskList from './taskList';
+import TaskList from '../task/taskList';
 import { useCustomNavigate } from '../../reduxStore/hooks/hooks';
 import { PATH } from '../../constants/path';
 
@@ -12,9 +12,7 @@ const Dashboard: React.FC = () => {
         }
     }, [])
     return (
-        <div >
             <TaskList />
-        </div>
     );
 };
 

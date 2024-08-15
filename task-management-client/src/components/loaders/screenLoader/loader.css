@@ -1,16 +1,26 @@
 .loader-container {
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 200px;
     height: 100%;
     width: 100%;
-    min-height: 200px;
+    background: rgba(34, 34, 34, 0.7);
+    z-index: 9999;
 }
 
 .spinner {
     font-size: 3rem;
     color: #007bff;
-    /* Change this to your desired color */
+    animation: spin 1s linear infinite;
+}
+
+.button-spinner {
+    /* font-size: 3rem; */
+    color: #007bff;
     animation: spin 1s linear infinite;
 }
 
