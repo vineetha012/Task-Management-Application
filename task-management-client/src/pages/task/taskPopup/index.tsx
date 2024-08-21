@@ -11,6 +11,7 @@ import { useCreateTaskMutation } from '../../../services/task';
 import { toast } from 'react-toastify';
 import './task.css'
 import { InputGroup } from 'react-bootstrap';
+import ButtonLoader from '../../../components/loaders/buttonLoader';
 
 interface TaskFormProps {
     currentCol: string;
@@ -164,7 +165,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ setCurrentCol, currentCol, handleCl
                     </Form.Group>
                     <div className='addtask-btn-container'>
                         <Button className='addtask-btn' variant="primary" type="submit">
-                            {createTaskApiIsLoading ? 'Loading...' : 'Add Task'}
+                            {createTaskApiIsLoading ? <ButtonLoader /> : 'Add Task'}
                         </Button>
                     </div>
                     

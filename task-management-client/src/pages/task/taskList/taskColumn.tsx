@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCustomNavigate } from "../../../reduxStore/hooks/hooks";
 import { useDrop } from "react-dnd";
 import styles from './taskList.module.css';
 import { ItemTypes, TaskType } from "./taskController";
 import { PATH } from "../../../constants/path";
-import { FaPlus } from "react-icons/fa";
 import Task from "./taskCard";
 import TaskForm from "../taskPopup";
 import { CiSquarePlus } from "react-icons/ci";
@@ -41,7 +40,9 @@ const Column: React.FC<{ tasksListApiIsLoading: boolean, column: Column; moveTas
     const handleShowTaskForm = () => {
         setShowTaskForm(true);
     };
-
+    useEffect(() => {
+        console.log('child')
+    }, [])
     return (
         <div ref={drop} className={`${styles.column} ${isOver ? styles.over : ''}`}>
             <div className={styles.columnTitleContainer}>

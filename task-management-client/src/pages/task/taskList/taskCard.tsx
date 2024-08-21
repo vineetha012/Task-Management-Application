@@ -1,6 +1,6 @@
 
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import styles from './taskList.module.css';
 import { useCustomNavigate } from '../../../reduxStore/hooks/hooks';
@@ -38,9 +38,13 @@ const Task: React.FC<TaskProps> = ({ task, coltitle, index, columnId, moveTask }
                 toast.success(payload?.message || 'Task deleted successfully')
             }).catch((error) => toast.error(error?.data?.error?.message || 'Failed to delete task'))
     }
+    useEffect(() => {
+        console.log('card')
+    }, [])
     return (
         <div
             ref={ref}
+            title='Drag the task to change the status'
             className={`${styles.taskCard} ${isDragging ? styles.dragging : ''}`}
         >
             <div className={styles.taskHeader}>

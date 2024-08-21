@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { DndProvider, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import styles from './taskList.module.css';
@@ -41,10 +41,13 @@ const TaskList: React.FC = () => {
                 toast.success(payload?.message || 'status updated successfully')
             }).catch((error: any) => toast.error(error?.data?.error?.message || 'failed to update status.'))
     };
-
+    useEffect(() => {
+        console.log('parent')
+    }, [])
     return (
         <DndProvider backend={HTML5Backend}>
             <div className={styles.board}>
+
                 {editTaskApiIsLoading || tasksListApiIsLoading && <Loader />}
                 {// tasksListApiIsLoading ? <Loader />:
                     !tasksListApiIsError ?
